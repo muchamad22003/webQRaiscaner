@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>QR Scanner → Google Sheet</title>
+
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- jsQR (decoder) -->
+  <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <h1>QR Scanner — Simpan ke Google Sheets</h1>
+    <div class="controls">
+      <button id="startBtn">Mulai Scan</button>
+      <button id="stopBtn" disabled>Stop</button>
+      <button id="refreshList">Refresh List</button>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="scanner">
+      <div class="video-wrap">
+        <video id="video" autoplay playsinline></video>
+        <canvas id="canvas" hidden></canvas>
+      </div>
+      <div class="scan-info">
+        <p id="status">Status: Idle</p>
+        <div id="detectedArea" class="detected">Belum ada hasil</div>
+      </div>
+    </section>
+
+    <section class="form">
+      <h2>Hasil Scan / Simpan Manual</h2>
+      <label>Data QR / Barcode</label>
+      <input id="codeInput" placeholder="Hasil scan akan tampil di sini" />
+      <label>Tipe (opsional)</label>
+      <input id="typeInput" placeholder="QR / Barcode / custom" />
+      <label>Keterangan (opsional)</label>
+      <input id="noteInput" placeholder="Contoh: tiket A01" />
+      <div class="form-actions">
+        <button id="saveBtn">Simpan ke Sheet</button>
+        <button id="clearBtn">Bersihkan</button>
+      </div>
+      <p class="hint">Setelah simpan, data akan dikirim ke Google Sheet dan muncul di bawah.</p>
+    </section>
+
+    <section class="list">
+      <h2>Daftar Entri (Sheet)</h2>
+      <table id="sheetTable">
+        <thead>
+          <tr><th>#</th><th>Waktu</th><th>Code</th><th>Type</th><th>Note</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <small>Built with jsQR • Simpan ke Google Sheets via Apps Script</small>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
